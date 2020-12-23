@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    volumes:
+      - .:/work
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    depends_on:
+      - php
+    ports:
+      - 80:80
+
+  composer:
+    build:
+      context: .
+      dockerfile: ./docker/composer/Dockerfile
+    volumes:
+      - .:/work
+
+  node:
+    build:
+      context: .
+      dockerfile: ./docker/node/Dockerfile
+    volumes:
+      - .:/work
