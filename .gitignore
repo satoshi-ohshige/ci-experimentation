@@ -1,8 +1,11 @@
 .DS_Store
 .idea
 /node_modules
+/public/css
+/public/js
 /public/hot
 /public/storage
+/public/mix-manifest.json
 /storage/*.key
 /vendor
 .env
