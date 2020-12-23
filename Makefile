@@ -26,7 +26,7 @@ logs: ## コンテナのログを逐次表示します。
 
 .PHONY: composer-install
 composer-install: ## `composer install` を実行します。
-	docker-compose run --rm node composer install
+	docker-compose run --rm composer composer install
 
 
 .PHONY: npm-install
