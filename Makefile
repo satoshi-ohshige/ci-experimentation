@@ -44,3 +44,16 @@ init: ## プロジェクトの初期設定を行います。
 	@make composer-install
 	@make npm-install
 	@make npm-dev
+
+
+.PHONY: qa-cs
+qa-cs: ## QAとして `phpcs` を実行し、コーディング規約に則っているか判定します。
+	docker-compose run --rm composer vendor/bin/phpcs
+
+.PHONY: qa-fix
+qa-fix: ## QAとして `phpcbf` を実行し、コーディング規約に則っていない箇所で自動修正できる場合は修正します。
+	docker-compose run --rm composer vendor/bin/phpcbf
+
+.PHONY: qa-analyse
+qa-analyse: ## QAとして `phpstan` を実行し、静的解析を行います。
+	docker-compose run --rm composer vendor/bin/phpstan analyse -c phpstan.neon --no-progress --ansi
