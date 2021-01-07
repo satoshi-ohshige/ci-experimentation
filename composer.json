@@ -54,11 +54,17 @@
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
         ],
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ],
-        "post-create-project-cmd": [
+        "dev": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "@php artisan key:generate --ansi"
+        ],
+        "test": "phpunit",
+        "cs": "phpcs",
+        "fix": "phpcbf",
+        "analyse": "phpstan analyse -c phpstan.neon --no-progress --ansi",
+        "qa": [
+            "phpcs",
+            "phpstan analyse -c phpstan.neon --no-progress --ansi"
         ]
     }
 }

@@ -1,6 +1,10 @@
 <?xml version="1.0"?>
 <ruleset>
-    <rule ref="PSR12"/>
+    <rule ref="PSR12">
+        <!-- PHP 8.0 からの constructor property promotion を使ってコンストラクタ内で改行するとエラーが出るので一時的に除外 -->
+        <!-- phpcs 3.6.0 からは正常に使えるはず @see https://github.com/squizlabs/PHP_CodeSniffer/milestone/25 -->
+        <exclude name="Generic.WhiteSpace.ScopeIndent.IncorrectExact"/>
+    </rule>
     <file>app</file>
     <file>tests</file>
 </ruleset>
