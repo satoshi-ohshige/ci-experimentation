@@ -26,11 +26,11 @@ logs: ## コンテナのログを逐次表示します。
 
 .PHONY: composer-install
 composer-install: ## `composer install` を実行します。
-	docker-compose run --rm composer composer install
+	docker-compose run --rm php-cli composer install
 
 .PHONY: composer-dev
 composer-dev: ## `composer dev` を実行します。
-	docker-compose run --rm composer composer dev
+	docker-compose run --rm php-cli composer dev
 
 
 .PHONY: npm-install
@@ -54,20 +54,20 @@ init: ## プロジェクトの初期設定を行います。
 .PHONY: test
 test: ## phpunitを実行します。テスト対象を `TARGET=xxx` で指定できます。 `DEBUG=debug` と指定することでXDebugで実行できます。
 	$(eval DEBUG_MODE := $(if ${DEBUG}, -dxdebug.mode=${DEBUG}, ))
-	docker-compose run --rm composer php $(DEBUG_MODE) vendor/bin/phpunit ${TARGET}
+	docker-compose run --rm php-cli php $(DEBUG_MODE) vendor/bin/phpunit ${TARGET}
 
 .PHONY: qa-cs
 qa-cs: ## QAとして、コーディング規約に則っているか判定します。
-	docker-compose run --rm composer composer cs
+	docker-compose run --rm php-cli composer cs
 
 .PHONY: qa-fix
 qa-fix: ## QAとして、コーディング規約に則っていない箇所で自動修正できる場合は修正します。
-	docker-compose run --rm composer composer fix
+	docker-compose run --rm php-cli composer fix
 
 .PHONY: qa-analyse
 qa-analyse: ## QAとして、静的解析を行います。
-	docker-compose run --rm composer composer analyse
+	docker-compose run --rm php-cli composer analyse
 
 .PHONY: qa
 qa: ## QAとして、コーディング規約判定や静的解析をまとめて行います。
-	docker-compose run --rm composer composer qa
+	docker-compose run --rm php-cli composer qa

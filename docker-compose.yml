@@ -19,10 +19,10 @@ services:
     ports:
       - 80:80
 
-  composer:
+  php-cli:
     build:
       context: .
-      dockerfile: ./docker/composer/Dockerfile
+      dockerfile: ./docker/php-cli/Dockerfile
     volumes:
       - .:/work
 
