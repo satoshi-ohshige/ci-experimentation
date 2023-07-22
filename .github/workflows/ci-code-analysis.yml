@@ -1,6 +1,5 @@
 name: CI Code Analysis
-on:
-  - pull_request
+on: pull_request
 jobs:
   php-lint:
     runs-on: ubuntu-latest
