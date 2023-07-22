@@ -27,4 +27,4 @@ jobs:
       - name: Install dependencies
         run: composer install --working-dir=src --prefer-dist
       - name: Lint
-        run: src/vendor/bin/phpcs --standard=src/phpcs.xml | cs2pr
+        run: src/vendor/bin/phpcs --standard=src/phpcs.xml -q | cs2pr
