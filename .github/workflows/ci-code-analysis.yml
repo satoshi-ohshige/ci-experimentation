@@ -24,4 +24,4 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist
       - name: Lint
-        run: vendor/bin/phpcs --report=checkstyle | cs2pr
+        run: vendor/bin/phpcs --standard=phpcs.xml --report=checkstyle | cs2pr
