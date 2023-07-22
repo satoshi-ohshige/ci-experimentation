@@ -4,5 +4,4 @@ jobs:
   ci:
     runs-on: ubuntu-latest
     steps:
-      - name: dummy
-        run: echo 'dummy'
+      - run: echo 'This is empty ci.'
