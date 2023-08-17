@@ -11,6 +11,7 @@
         <!-- phpcs 3.6.0 からは正常に使えるはず @see https://github.com/squizlabs/PHP_CodeSniffer/milestone/25 -->
         <exclude name="Generic.WhiteSpace.ScopeIndent.IncorrectExact"/>
     </rule>
+    <rule ref="Generic.PHP.RequireStrictTypes"/>
     <file>app</file>
     <file>tests</file>
 </ruleset>
