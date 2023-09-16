@@ -15,4 +15,19 @@ class ExampleTest extends TestCase
     {
         $this->assertTrue(true);
     }
+
+    public function testX()
+    {
+        $this->assertSame('abc', 'xyz');
+    }
+
+    public function testY()
+    {
+        $this->assertTrue(false, 'trueになるはず');
+    }
+
+    public function testZ()
+    {
+        $this->assertTrue(false);
+    }
 }

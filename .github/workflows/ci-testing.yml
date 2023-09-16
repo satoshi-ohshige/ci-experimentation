@@ -1,0 +1,38 @@
+name: CI - Testing
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/ci-testing.yml'
+      - 'src/**'
+jobs:
+  phpunit:
+    runs-on: ubuntu-latest
+    services:
+      mysql-testing:
+        image: mysql:5.7
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_DATABASE: testing-db
+          MYSQL_USER: testing
+          MYSQL_PASSWORD: password
+          MYSQL_ROOT_PASSWORD: password
+          TZ: Asia/Tokyo
+        options: --health-cmd "mysqladmin ping -h localhost" --health-interval 20s --health-timeout 10s --health-retries 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+          ini-values: date.timezone=Asia/Tokyo, mbstring.language=Japanese
+          tools: composer:v2
+      - name: Setup problem matchers for PHPUnit
+        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+      - name: Install dependencies
+        run: composer install --working-dir=src --prefer-dist
+      - name: PHPUnit
+        run: src/vendor/bin/phpunit -c src/phpunit.xml
+        env:
+          DB_HOST: 0.0.0.0
