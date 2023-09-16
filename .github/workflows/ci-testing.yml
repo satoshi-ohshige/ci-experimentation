@@ -1,0 +1,29 @@
+name: CI - Testing
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/ci-testing.yml'
+      - 'src/**'
+jobs:
+  phpunit:
+    runs-on: ubuntu-latest
+    services:
+      mysql-testing:
+        image: mysql:5.7
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_DATABASE: testing-db
+          MYSQL_USER: testing
+          MYSQL_PASSWORD: password
+          MYSQL_ROOT_PASSWORD: password
+        options: --health-cmd "mysqladmin ping -h localhost" --health-interval 20s --health-timeout 10s --health-retries 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: MySQLの設定
+        run: |
+          mysql --ssl-mode=DISABLE --protocol=tcp --host 127.0.0.1 --user=testing --password=password testing-db <<SQL
+          show variables like 'chara%';
+          show variables like '%time_zone%';
+          SQL
