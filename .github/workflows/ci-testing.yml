@@ -17,6 +17,7 @@ jobs:
           MYSQL_USER: testing
           MYSQL_PASSWORD: password
           MYSQL_ROOT_PASSWORD: password
+          TZ: Asia/Tokyo
         options: --health-cmd "mysqladmin ping -h localhost" --health-interval 20s --health-timeout 10s --health-retries 10
     steps:
       - name: Checkout
