@@ -5,6 +5,8 @@ services:
     build:
       context: .
       dockerfile: ./docker/php/Dockerfile
+    depends_on:
+      - mysql-testing
     volumes:
       - .:/work
 
@@ -23,6 +25,8 @@ services:
     build:
       context: .
       dockerfile: ./docker/php-cli/Dockerfile
+    depends_on:
+      - mysql-testing
     volumes:
       - .:/work
 
@@ -32,3 +36,19 @@ services:
       dockerfile: ./docker/node/Dockerfile
     volumes:
       - .:/work
+
+  mysql-testing:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=testing-db
+      - MYSQL_USER=testing
+      - MYSQL_PASSWORD=password
+      - TZ=Asia/Tokyo
+    ports:
+      - "13306:3306"
+    volumes:
+      - database-testing:/var/lib/mysql
+
+volumes:
+  database-testing:
