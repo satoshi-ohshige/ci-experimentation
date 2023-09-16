@@ -32,6 +32,8 @@ jobs:
         run: composer install --working-dir=src --prefer-dist
       - name: PHPUnit
         run: src/vendor/bin/phpunit -c src/phpunit.xml
+        env:
+          DB_HOST: 0.0.0.0
       - name: MySQLの設定
         run: |
           mysql --ssl-mode=DISABLE --protocol=tcp --host 127.0.0.1 --user=testing --password=password testing-db <<SQL
